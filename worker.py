@@ -113,7 +113,7 @@ async def on_ready():
 async def on_message(message):
     if not message.author.bot and '!plan text' in message.content:
         await client.send_message(message.channel, '```' + get_table() + '```')
-    elif not message.author.bot and '!plan bild' in message.content:
+    elif not message.author.bot and '!plan' in message.content:
         # Create and send the table as an image
         img = Image.new('RGB', (500, 125), color = (255, 255, 255))
         d = ImageDraw.Draw(img)
