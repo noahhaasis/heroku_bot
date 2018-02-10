@@ -115,9 +115,11 @@ async def on_message(message):
         await client.send_message(message.channel, '```' + get_table() + '```')
     elif not message.author.bot and '!plan' in message.content:
         # Create and send the table as an image
-        img = Image.new('RGB', (500, 125), color = (255, 255, 255))
+        plan_text = get_table()
+        plan_text = os.linesep.join([s for s in plan_text.splitlines() if s])
+        img = Image.new('RGB', (500, 10 + 20*len(plan_text.splitlines())), color = (255, 255, 255))
         d = ImageDraw.Draw(img)
-        d.text((10,10), get_table(), fill=(0,0,0))
+        d.text((10,10), plan_text, fill=(0,0,0))
         img.save('plan.png')
         with open('plan.png', 'rb') as f:
             await client.send_file(message.channel, f)
