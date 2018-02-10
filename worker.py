@@ -122,5 +122,4 @@ async def on_message(message):
         with open('plan.png', 'rb') as f:
             await client.send_file(message.channel, f)
 
-print('Hello world')
 client.run(os.environ['BOT'])
