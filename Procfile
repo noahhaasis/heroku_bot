@@ -1,1 +1,1 @@
-worker: python vertretungsplan.py 
+worker: python worker.py 

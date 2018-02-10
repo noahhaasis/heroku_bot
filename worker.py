@@ -1,4 +1,3 @@
-# Token: NDA4NjIwOTg0MzU0OTk2MjI0.DVSthQ.H-rA36NQLvksFn0hrzBUx3Vr1vg
 '''
 Loads the timetable for the class 10a from the school website
 and posts it to the class channel on discord.
@@ -6,6 +5,7 @@ and posts it to the class channel on discord.
 import asyncio
 import datetime
 import discord
+import os
 import text_to_image
 import re
 import requests
@@ -123,4 +123,4 @@ async def on_message(message):
         with open('plan.png', 'rb') as f:
             await client.send_file(message.channel, f)
 
-client.run('NDA4NjIwOTg0MzU0OTk2MjI0.DVSthQ.H-rA36NQLvksFn0hrzBUx3Vr1vg')
+client.run(os.environ['BOT'])
