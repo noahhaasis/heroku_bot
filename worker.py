@@ -6,7 +6,6 @@ import asyncio
 import datetime
 import discord
 import os
-import text_to_image
 import re
 import requests
 from bs4 import BeautifulSoup
