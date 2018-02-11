@@ -5,6 +5,7 @@ and posts it to the class channel on discord.
 import asyncio
 import datetime
 import discord
+import imgkit
 import os
 import re
 import requests
@@ -83,6 +84,10 @@ def get_table():
     response = requests.get(url, auth=(username, password))
     # TODO: Handle any failure
 
+    # Write the HTML to a file
+    with open('vertretungsplan.html', 'w') as f:
+        f.write(response.text)
+
     # Parse the data for the table
     soup = BeautifulSoup(response.text, 'lxml')
     tables = soup.find_all('table', class_='subst') # Where class is 'subst'
@@ -113,9 +118,15 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if not message.author.bot and '!plan text' in message.content:
+    if message.author.bot:
+        return
+    elif '!plan text' in message.content:
         await client.send_message(message.channel, '```' + get_table() + '```')
-    elif not message.author.bot and '!plan' in message.content:
+    elif '!plan html' in message.content:
+        imgkit.from_file('vertretungsplan.html', 'vertretungsplans_rendered.jpg')
+        with open('vertretungsplans_rendered.jpg') as f:
+            await client.send_file(message.channel, f)
+    elif '!plan' in message.content:
         # Create and send the table as an image
         plan_text = get_table()
         if plan_text and not plan_text.isspace()
