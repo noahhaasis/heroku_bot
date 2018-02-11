@@ -75,7 +75,7 @@ def get_table():
     # Request the timetable from the sever
     base_url = 'https://www.wvsgym.de/vertretungsplans'
     iso_date = datetime.date.today().isocalendar()
-    week_of_year = '{0:02d}'.format(iso_date[1] if iso_date[2] not in [6, 7] else iso_date[1] + 1) 
+    week_of_year = '{0:02d}'.format(iso_date[1] if iso_date[2] not in [6, 7] else iso_date[1] + 1)
     filename = 'w00022.htm' # NOTE: The filename if dependent on the class
     url = '/'.join([base_url, week_of_year, 'w', filename])
     username = 'schueler'
@@ -118,11 +118,12 @@ async def on_message(message):
     elif not message.author.bot and '!plan' in message.content:
         # Create and send the table as an image
         plan_text = get_table()
-        img = Image.new('RGB', (500, 10 + 20*len(plan_text.splitlines())), color = (255, 255, 255))
-        d = ImageDraw.Draw(img)
-        d.text((10,10), plan_text, fill=(0,0,0))
-        img.save('plan.png')
-        with open('plan.png', 'rb') as f:
-            await client.send_file(message.channel, f)
+        if plan_text and not plan_text.isspace()
+            img = Image.new('RGB', (500, 10 + 20*len(plan_text.splitlines())), color = (255, 255, 255))
+            d = ImageDraw.Draw(img)
+            d.text((10,10), plan_text, fill=(0,0,0))
+            img.save('plan.png')
+            with open('plan.png', 'rb') as f:
+                await client.send_file(message.channel, f)
 
 client.run(os.environ['BOT'])
