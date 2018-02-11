@@ -5,7 +5,6 @@ and posts it to the class channel on discord.
 import asyncio
 import datetime
 import discord
-import imgkit
 import os
 import re
 import requests
@@ -123,9 +122,7 @@ async def on_message(message):
     elif '!plan text' in message.content:
         await client.send_message(message.channel, '```' + get_table() + '```')
     elif '!plan html' in message.content:
-        imgkit.from_file('vertretungsplan.html', 'vertretungsplans_rendered.jpg')
-        with open('vertretungsplans_rendered.jpg') as f:
-            await client.send_file(message.channel, f)
+        pass
     elif '!plan' in message.content:
         # Create and send the table as an image
         plan_text = get_table()
