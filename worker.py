@@ -74,8 +74,8 @@ def get_days_from_table(table):
 def get_table():
     # Request the timetable from the sever
     base_url = 'https://www.wvsgym.de/vertretungsplans'
-    iso_date = '{0:02d}'.format(datetime.date.today().isocalendar())
-    week_of_year = iso_date[1]
+    iso_date = datetime.date.today().isocalendar()
+    week_of_year = '{0:02d}'.format(iso_date[1] if iso_date[2] not in [6, 7] else iso_date[1] + 1) 
     filename = 'w00022.htm' # NOTE: The filename if dependent on the class
     url = '/'.join([base_url, week_of_year, 'w', filename])
     username = 'schueler'
