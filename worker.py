@@ -79,7 +79,7 @@ def get_table():
     filename = 'w00022.htm' # NOTE: The filename if dependent on the class
     url = '/'.join([base_url, week_of_year, 'w', filename])
     username = 'schueler'
-    password = '5schulE9'
+    password = os.environ['VERTRETUNGSPLAN_PASSWORD']
     response = requests.get(url, auth=(username, password))
     # TODO: Handle any failure
 
