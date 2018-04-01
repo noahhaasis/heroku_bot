@@ -72,7 +72,7 @@ def get_days_from_table(table):
     return Day(weekday, res)
 
 def get_table():
-    # Request the timetable from the sever
+    # Request timetable
     base_url = 'https://www.wvsgym.de/vertretungsplans'
     iso_date = datetime.date.today().isocalendar()
     week_of_year = '{0:02d}'.format(iso_date[1] if iso_date[2] not in [6, 7] else iso_date[1] + 1)
@@ -83,11 +83,11 @@ def get_table():
     response = requests.get(url, auth=(username, password))
     # TODO: Handle any failure
 
-    # Write the HTML to a file
+    # Write HTML to file
     with open('vertretungsplan.html', 'w') as f:
         f.write(response.text)
 
-    # Parse the data for the table
+    # Parse the tabledata
     soup = BeautifulSoup(response.text, 'lxml')
     tables = soup.find_all('table', class_='subst') # Where class is 'subst'
     # convert the list to a list of two elements where the first is the weekday and the second the schedule
