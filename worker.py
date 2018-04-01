@@ -89,7 +89,7 @@ def get_table():
 
     # Parse the tabledata
     soup = BeautifulSoup(response.text, 'lxml')
-    tables = soup.find_all('table', class_='subst') # Where class is 'subst'
+    tables = soup.find_all('table', class_='subst')
     # convert the list to a list of two elements where the first is the weekday and the second the schedule
     weekdays = [
         'Montag',
