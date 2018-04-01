@@ -124,7 +124,7 @@ async def on_message(message):
     elif '!plan html' in message.content:
         pass
     elif '!plan' in message.content:
-        # Create and send the table as an image
+        # Create image from table and send it as reply
         plan_text = get_table()
         if plan_text and not plan_text.isspace()
             img = Image.new('RGB', (500, 10 + 20*len(plan_text.splitlines())), color = (255, 255, 255))
